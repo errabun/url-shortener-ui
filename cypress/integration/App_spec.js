@@ -48,7 +48,8 @@ describe('User flows', () => {
       .get('.title-input').type(titleInput)
       .get('.url-input').type(longUrlInput)
       .get('.form-submit').click()
-      .get('.url-title').should('be.visible')
+      .get('.short-url').should('be.visible')
+      .and('have.text', 'http://localhost:3001/useshorturl/1')
   })
 
 })
