@@ -15,7 +15,7 @@ export class App extends Component {
   componentDidMount() {
     getUrls()
       .then(data => this.setState({ urls:  data.urls }))
-      .catch(error => this.setState({ error: error}))
+      .catch(error => this.setState({ error: "Couldn't fetch any shortened URL's, please try again"}))
   }
 
   updateState = url => {
