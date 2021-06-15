@@ -22,3 +22,33 @@ describe('App', () => {
   })
 
 })
+
+describe('User flows', () => {
+
+  it('When a user fills out and submits the form, the new shortened URL is rendered', () => {
+
+    const longUrlInput = 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fweneedfun.com%2Fwp-content%2Fuploads%2F2015%2F10%2FCute-puppy-Pictures-21.jpg&f=1&nofb=1'
+
+    const titleInput = 'Cute Puppies'
+
+    cy.intercept('POST', 'http://localhost:3001/api/v1/urls', {
+      statusCode: 201,
+      body: JSON.stringify({
+        id: 1,
+        long_url: longUrlInput,
+        short_url: 'http://localhost:3001/useshorturl/1',
+        title: titleInput
+      }),
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .intercept('http://localhost:3001/api/v1/urls', {
+        'urls': []
+      })
+      .visit('http://localhost:3000/')
+      .get('.title-input').type(titleInput)
+      .get('.url-input').type(longUrlInput)
+      .get('.form-submit').click()
+      .get('.url-title').should('be.visible')
+  })
+
+})
