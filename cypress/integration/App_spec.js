@@ -21,8 +21,4 @@ describe('App', () => {
       .and('have.text', 'URL Shortener')
   })
 
-  it('Whena  user visits the page, they can view the exisiting shortened URLs', () => {
-
-    
-  })
 })
