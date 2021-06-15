@@ -51,5 +51,20 @@ describe('User flows', () => {
       .get('.short-url').should('be.visible')
       .and('have.text', 'http://localhost:3001/useshorturl/1')
   })
+})
 
+describe('Error Handling', () => {
+
+  beforeEach(() => {
+
+    cy.intercept('http://localhost:3001/api/v1/urls', {
+      'urls': []
+    })
+      .visit('http://localhost:3000/')
+  })
+
+  it('Should notify user if there are no urls to shorten from api get request', () => {
+
+    cy.get('')
+  })
 })
