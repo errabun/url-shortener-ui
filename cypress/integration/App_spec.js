@@ -15,9 +15,14 @@ describe('App', () => {
       .visit('http://localhost:3000/')
   })
 
-  it('When a user visits the page, they can view the page title and the existing shortened URLs', () => {
+  it('When a user visits the page, they can view the page title', () => {
 
     cy.get('.title').should('be.visible')
       .and('have.text', 'URL Shortener')
+  })
+
+  it('Whena  user visits the page, they can view the exisiting shortened URLs', () => {
+
+    
   })
 })
