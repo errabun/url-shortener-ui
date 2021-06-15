@@ -55,17 +55,21 @@ describe('User flows', () => {
 
 describe('Error Handling', () => {
 
-  beforeEach(() => {
+  it('Should notify user if there are no urls to shorten from api get request', () => {
 
     cy.intercept('http://localhost:3001/api/v1/urls', {
       'urls': []
     })
       .visit('http://localhost:3000/')
+      .get('.no-urls').should('be.visible')
+      .and('have.text', 'No urls yet! Find some to shorten!')
   })
 
-  it('Should notify user if there are no urls to shorten from api get request', () => {
+  it('User should be notified with an error message if API fectch was unsuccessful', () => {
 
-    cy.get('.no-urls').should('be.visible')
-      .and('have.text', 'No urls yet! Find some to shorten!')
+    cy.intercept('http://localhost:3001/api/v1/urls', {})
+      .visit('http://localhost:3000/')
+      .get('.error-msg').should('be.visible')
+      .and('have.text', "Couldn't fetch any shortened URL's, please try again")
   })
 })
