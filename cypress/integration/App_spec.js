@@ -65,6 +65,7 @@ describe('Error Handling', () => {
 
   it('Should notify user if there are no urls to shorten from api get request', () => {
 
-    cy.get('')
+    cy.get('.no-urls').should('be.visible')
+      .and('have.text', 'No urls yet! Find some to shorten!')
   })
 })
