@@ -29,8 +29,11 @@ export class App extends Component {
           <h1 className='title'>URL Shortener</h1>
           <UrlForm newUrl={this.updateState} />
         </header>
-
-        <UrlContainer urls={this.state.urls} />
+        {!this.state.error &&
+          <UrlContainer urls={this.state.urls} />}
+        {this.state.error &&
+          <h1 className='error-msg'>{this.state.error}</h1>
+        }
       </main>
     );
   }
